@@ -22,7 +22,11 @@ with DAG(
 
     run_dbt = BashOperator(
         task_id="run_dbt_silver_gold",
-        bash_command=f'cd "{PROJECT_ROOT}/dbt_project" && dbt run && dbt test',
+        bash_command=(
+            f'cd "{PROJECT_ROOT}/dbt_project" && '
+            f'export DBT_PROFILES_DIR="{PROJECT_ROOT}/dbt_project" && '
+            f'dbt run && dbt test'
+        ),
     )
 
     generate_data >> load_bronze >> run_dbt
