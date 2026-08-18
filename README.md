@@ -184,6 +184,7 @@ Building this end-to-end surfaced real infrastructure problems, not just modelin
 - **Airflow inside Docker can't see the host filesystem by default** — required a custom `Dockerfile` (to install `faker`/`duckdb`/`dbt-duckdb` into the Airflow image) plus an explicit volume mount to expose the project folder inside the container at a Linux path.
 - **dbt inside the container couldn't find its connection profile** — the local `~/.dbt/profiles.yml` only exists on the host machine; fixed by shipping a container-portable `profiles.yml` inside the dbt project itself and pointing `dbt` at it via `DBT_PROFILES_DIR`.
 - **~80 bundled Airflow example DAGs** made the real pipeline hard to find in the UI — solved by searching explicitly and later disabling `AIRFLOW__CORE__LOAD_EXAMPLES`.
+- **`.gitignore` didn't stop already-committed files from changing** — Airflow's log files were committed before `.gitignore` excluded them, so every DAG run kept showing up as a noisy "modified" change. Fixed by running `git rm -r --cached airflow/logs` to untrack the folder without deleting it locally, then committing that change once.
 
 ## What I'd Improve Next
 
@@ -194,4 +195,11 @@ Building this end-to-end surfaced real infrastructure problems, not just modelin
 
 ## Screenshots
 
-*(Add a screenshot or short GIF of the Streamlit dashboard here — e.g. `docs/dashboard-screenshot.png`)*
+**Customer 360 Dashboard** — key metrics and the unified customer table:
+![Dashboard overview](docs\- Streamlit_1 -.png)
+
+**Lifetime value distribution** across all resolved customers:
+![Lifetime value chart](docs\- Streamlit_2 -.png)
+![Lifetime value chart](docs\- Streamlit_3 -.png)
+**Automated pipeline run in Airflow** — all three tasks (generate → load → transform/test) succeeding end-to-end:
+![Airflow pipeline success](docs/Airflow.png)
