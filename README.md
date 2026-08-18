@@ -196,10 +196,10 @@ Building this end-to-end surfaced real infrastructure problems, not just modelin
 ## Screenshots
 
 **Customer 360 Dashboard** — key metrics and the unified customer table:
-![Dashboard overview](docs\- Streamlit_1 -.png)
+![Dashboard overview](docs/Streamlit_1.png.png)
 
 **Lifetime value distribution** across all resolved customers:
-![Lifetime value chart](docs\- Streamlit_2 -.png)
-![Lifetime value chart](docs\- Streamlit_3 -.png)
+![Lifetime value chart](docs/Streamlit_2 -.png)
+![Lifetime value chart](docs/Streamlit_3.png)
 **Automated pipeline run in Airflow** — all three tasks (generate → load → transform/test) succeeding end-to-end:
 ![Airflow pipeline success](docs/Airflow.png)
